@@ -5,7 +5,7 @@ import express from "express";
 // import resolvers from "#root/graphql/resolvers";
 import typeDefs from "../graphql/typeDef";
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 const apolloserver = new ApolloServer({
     resolvers: {},
