@@ -4,39 +4,12 @@ import cron from "node-cron";
 
 import "./db/connection";
 import Manga from "./db/models/Manga";
-
-const axiosME = axios.create({
-  baseURL: process.env.MANGAEDEN_URL
-});
-
-const transformMangeEden = manga =>
-  manga
-    .filter(manga => manga.ld)
-    .map(
-      ({
-        a: alias,
-        c: categories,
-        h: hits,
-        i: _id,
-        im: image,
-        ld: lastUpdated,
-        s: status,
-        t: title
-      }) => ({
-        _id,
-        alias,
-        categories,
-        hits,
-        image,
-        lastUpdated,
-        status,
-        title
-      })
-    );
+import { fetchAllMangas } from "./mangaSources/mangaEden";
 
 const seed = async () => {
-  const res = await axiosME.get();
+  const res = await fetchAllMangas("en");
   const mangas = transformMangeEden(res.data.manga);
+
   console.log('mangas back, got ' + mangas.length);
 
   await Manga.insertMany(mangas);
