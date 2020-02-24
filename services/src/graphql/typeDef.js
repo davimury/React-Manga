@@ -1,11 +1,18 @@
-const typeDefs = [`
-  schema {
-    query: RootQuery
+const { gql } = require('apollo-server');
+
+const typeDefs = gql`
+  scalar Date
+
+  type Manga {
+    id: ID!
+    image: String
+    lastUpdated: Date!
+    title: String!
   }
 
-  type RootQuery {
-    aNumber: Int
+  type Query {
+    mangas: [Manga!]!
   }
-`];
+`;
 
-export default typeDefs;
+module.exports = typeDefs;
