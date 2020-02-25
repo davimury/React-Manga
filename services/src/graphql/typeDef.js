@@ -1,6 +1,12 @@
-const { gql } = require("apollo-server");
+import { gql } from "apollo-server";
 
 const typeDefs = gql`
+  enum MangaStatus {
+    COMPLETED
+    ONGOING
+    SUSPENDED
+  }
+
   scalar Date
 
   type Chapter {
@@ -9,12 +15,12 @@ const typeDefs = gql`
     number: Int!
     title: String
   }
-
   type Manga {
     id: ID!
     info: MangaInfo!
     image: String
     lastUpdated: Date!
+    status: MangaStatus
     title: String!
   }
   type MangaInfo {
@@ -23,8 +29,8 @@ const typeDefs = gql`
   }
   type Query {
     manga(id: ID!): Manga!
-    mangas: [Manga!]!
+    mangas(searchTitle: String): [Manga!]!
   }
 `;
 
-module.exports = typeDefs;
+export default typeDefs;
