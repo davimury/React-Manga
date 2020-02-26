@@ -11,10 +11,19 @@ const typeDefs = gql`
 
   type Chapter {
     id: ID!
+    images: [ChapterImage!]!
     lastUpdated: Date!
-    number: Int!
+    number: Int
     title: String
   }
+
+  type ChapterImage {
+    index: Int!
+    url: String!
+    width: Int!
+    height: Int!
+  }
+
   type Manga {
     id: ID!
     info: MangaInfo!
@@ -23,11 +32,15 @@ const typeDefs = gql`
     status: MangaStatus
     title: String!
   }
+
   type MangaInfo {
+    description: String
     chapters: [Chapter!]!
     id: ID!
   }
+
   type Query {
+    chapter(id: ID!): Chapter
     manga(id: ID!): Manga!
     mangas(searchTitle: String): [Manga!]!
   }

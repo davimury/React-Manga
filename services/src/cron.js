@@ -1,4 +1,3 @@
-import axios from "axios";
 import "dotenv/config";
 import cron from "node-cron";
 
@@ -8,7 +7,7 @@ import { fetchAllMangas } from "./mangaSources/mangaEden";
 
 const seed = async () => {
   const res = await fetchAllMangas("en");
-  const mangas = transformMangeEden(res.data.manga);
+  const mangas = res.data.manga;
 
   console.log('mangas back, got ' + mangas.length);
 
@@ -19,6 +18,6 @@ const seed = async () => {
 
 seed();
 
-//cron.schedule("0 * * * *", () => {
-//  console.log("running a task every second");
-//});
+cron.schedule("0 * * * *", () => {
+  console.log("running a task every hour");
+});

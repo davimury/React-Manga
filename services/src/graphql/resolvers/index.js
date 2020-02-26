@@ -1,3 +1,4 @@
+import Chapter from "./Chapter";
 import Manga from "./Manga";
 import * as Query from "./Query";
 
@@ -8,6 +9,7 @@ const resolvers = {
     COMPLETED: 2
   },
   Manga,
+  Chapter,
   Query
 };
 

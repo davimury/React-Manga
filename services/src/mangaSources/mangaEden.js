@@ -1,8 +1,11 @@
 import globalAxios from "axios";
 
-var mangaEden = "https://www.mangaeden.com/api/";
+const IMAGES_CDN_BASE =
+  "https://cdn.mangaeden.com/mangasimg/";
+const MANGA_EDEN_URL = "https://www.mangaeden.com/api/";
+
 export const axios = globalAxios.create({
-  baseURL: mangaEden
+  baseURL: MANGA_EDEN_URL
 });
 
 const transformChapthers = chapters =>
@@ -11,6 +14,14 @@ const transformChapthers = chapters =>
     lastUpdated,
     number: parseInt(number),
     title
+  }));
+
+const transformImages = images =>
+  images.map(([index, url, width, height]) => ({
+    index,
+    url: IMAGES_CDN_BASE + url,
+    width,
+    height
   }));
 
 const transformMangas = manga =>
@@ -31,7 +42,7 @@ const transformMangas = manga =>
         alias,
         categories,
         hits,
-        image,
+        image: IMAGES_CDN_BASE + image,
         lastUpdated,
         status,
         title
@@ -44,6 +55,15 @@ export const fetchAllMangas = lang => {
     res.data.manga = transformMangas(res.data.manga);
     return res;
   });
+};
+
+export const fetchChapterImages = ({ chapterId }) => {
+  return axios
+    .get("chapter/" + chapterId + "/")
+    .then(res => {
+      res.data.images = transformImages(res.data.images);
+      return res;
+    });
 };
 
 export const fetchMangaInfo = ({ mangaId }) => {
