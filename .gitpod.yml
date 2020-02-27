@@ -2,5 +2,7 @@ image:
   file: .gitpod.dockerile
 tasks:
     - init: mkdir -p /workspace/data && mongod --port 3999 --dbpath /workspace/data
-    - command: cd services
-
+    - init: |
+        cd services
+        yarn
+        yarn watch
