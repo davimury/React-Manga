@@ -1,5 +1,5 @@
 image:
-  file: .gitpod.dockerfile
+  file: .gitpod.Dockerile
 tasks:
   - init: yarn
     command: mkdir -p /workspace/data && mongod --dbpath /workspace/data
