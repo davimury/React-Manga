@@ -3,6 +3,4 @@ image:
   
 tasks:
     - command: mkdir -p /workspace/data && mongod --port 3999 --dbpath /workspace/data
-      command: cd services
-      command: yarn
-      command: yarn watch
+
