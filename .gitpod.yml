@@ -1,4 +1,4 @@
 image:
   file: .gitpod.dockerile
 tasks:
-    -command: mkdir -p /workspace/data && mongod --dbpath /workspace/data
+    - command: mkdir -p /workspace/data && mongod --dbpath /workspace/data
