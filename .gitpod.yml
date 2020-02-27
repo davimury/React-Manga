@@ -6,3 +6,8 @@ tasks:
         cd services
         yarn
         yarn watch
+    - init: |
+       cd reader-app
+       yarn
+       yarn watch
+
