@@ -33,6 +33,8 @@ const App = () => {
         />
         
         <Route component={Home} path="/" />
+
+        <Route component={Home} path="/pt-br/" />
       </Switch>
     </div>
   );
